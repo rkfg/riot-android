@@ -33,7 +33,7 @@ import org.matrix.androidsdk.rest.model.MatrixError;
 import java.util.Collection;
 import java.util.HashMap;
 
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.activity.CommonActivityUtils;
 import im.vector.activity.VectorRoomActivity;
 
@@ -249,9 +249,9 @@ public class SlashComandsParser {
 
                 if (messageParts.length >= 2) {
                     if (TextUtils.equals(messageParts[1], "on")) {
-                        VectorApp.getInstance().mMarkdownParser.setEnable(true);
+                        VectorAppRkfgBeta.getInstance().mMarkdownParser.setEnable(true);
                     } else if (TextUtils.equals(messageParts[1], "off")) {
-                        VectorApp.getInstance().mMarkdownParser.setEnable(false);
+                        VectorAppRkfgBeta.getInstance().mMarkdownParser.setEnable(false);
                     }
                 }
             }

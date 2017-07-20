@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.contacts.Contact;
 import im.vector.contacts.PIDsRetriever;
 import im.vector.util.VectorUtils;
@@ -384,7 +384,7 @@ public class ParticipantAdapterItem implements java.io.Serializable {
      */
     public Bitmap getAvatarBitmap() {
         if (null != mContact) {
-            return mContact.getThumbnail(VectorApp.getInstance());
+            return mContact.getThumbnail(VectorAppRkfgBeta.getInstance());
         } else {
             return null;
         }

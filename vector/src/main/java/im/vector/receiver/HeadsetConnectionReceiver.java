@@ -24,7 +24,7 @@ import org.matrix.androidsdk.util.Log;
 
 import org.matrix.androidsdk.call.IMXCall;
 
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.activity.VectorCallViewActivity;
 import im.vector.util.VectorCallSoundManager;
 
@@ -40,7 +40,7 @@ public class HeadsetConnectionReceiver extends BroadcastReceiver {
      */
     private static AudioManager getAudioManager() {
         if (null == mAudioManager) {
-            mAudioManager =  (AudioManager)VectorApp.getInstance().getSystemService(Context.AUDIO_SERVICE);
+            mAudioManager =  (AudioManager) VectorAppRkfgBeta.getInstance().getSystemService(Context.AUDIO_SERVICE);
         }
 
         return mAudioManager;

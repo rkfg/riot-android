@@ -74,7 +74,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import im.vector.R;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.adapters.ParticipantAdapterItem;
 
 public class VectorUtils {
@@ -672,7 +672,7 @@ public class VectorUtils {
      * Display the licenses text.
      */
     public static void displayThirdPartyLicenses() {
-        final Activity activity = VectorApp.getCurrentActivity();
+        final Activity activity = VectorAppRkfgBeta.getCurrentActivity();
 
         if (null != activity) {
             if (null != mMainAboutDialog) {
@@ -747,8 +747,8 @@ public class VectorUtils {
      * Display the term and conditions.
      */
     public static void displayAppTac() {
-        if (null != VectorApp.getCurrentActivity()) {
-            displayInWebview(VectorApp.getCurrentActivity(), "https://riot.im/tac");
+        if (null != VectorAppRkfgBeta.getCurrentActivity()) {
+            displayInWebview(VectorAppRkfgBeta.getCurrentActivity(), "https://riot.im/tac");
         }
     }
 
@@ -756,8 +756,8 @@ public class VectorUtils {
      * Display the copyright.
      */
     public static void displayAppCopyright() {
-        if (null != VectorApp.getCurrentActivity()) {
-            displayInWebview(VectorApp.getCurrentActivity(), "https://riot.im/copyright");
+        if (null != VectorAppRkfgBeta.getCurrentActivity()) {
+            displayInWebview(VectorAppRkfgBeta.getCurrentActivity(), "https://riot.im/copyright");
         }
     }
 
@@ -765,8 +765,8 @@ public class VectorUtils {
      * Display the privacy policy.
      */
     public static void displayAppPrivacyPolicy() {
-        if (null != VectorApp.getCurrentActivity()) {
-            displayInWebview(VectorApp.getCurrentActivity(), "https://riot.im/privacy");
+        if (null != VectorAppRkfgBeta.getCurrentActivity()) {
+            displayInWebview(VectorAppRkfgBeta.getCurrentActivity(), "https://riot.im/privacy");
         }
     }
 

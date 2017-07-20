@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.util.PhoneNumberUtils;
 
 /**
@@ -114,7 +114,7 @@ public class Contact implements java.io.Serializable {
         public void refreshE164PhoneNumber() {
             if (TextUtils.isEmpty(mE164PhoneNumber)) {
                 // Attempt to deduce E164 format using the new country code
-                mMsisdnPhoneNumber = PhoneNumberUtils.getE164format(VectorApp.getInstance(), mRawPhoneNumber);
+                mMsisdnPhoneNumber = PhoneNumberUtils.getE164format(VectorAppRkfgBeta.getInstance(), mRawPhoneNumber);
                 if (TextUtils.isEmpty(mMsisdnPhoneNumber)) {
                     mMsisdnPhoneNumber = mCleanedPhoneNumber;
                 }

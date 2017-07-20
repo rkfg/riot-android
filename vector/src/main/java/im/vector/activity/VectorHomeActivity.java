@@ -26,8 +26,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -47,7 +45,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -108,7 +105,7 @@ import im.vector.Matrix;
 import im.vector.MyPresenceManager;
 import im.vector.PublicRoomsManager;
 import im.vector.R;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.fragments.AbsHomeFragment;
 import im.vector.fragments.FavouritesFragment;
 import im.vector.fragments.HomeFragment;
@@ -292,13 +289,13 @@ public class VectorHomeActivity extends VectorAppCompatActivity implements Searc
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         int version = preferences.getInt("VERSION_BUILD", 0);
 
-        if (version != VectorApp.VERSION_BUILD) {
-            Log.d(LOG_TAG, "The application has been updated from version " + version + " to version " + VectorApp.VERSION_BUILD);
+        if (version != VectorAppRkfgBeta.VERSION_BUILD) {
+            Log.d(LOG_TAG, "The application has been updated from version " + version + " to version " + VectorAppRkfgBeta.VERSION_BUILD);
 
             // TODO add some dedicated actions here
 
             SharedPreferences.Editor editor = preferences.edit();
-            editor.putInt("VERSION_BUILD", VectorApp.VERSION_BUILD);
+            editor.putInt("VERSION_BUILD", VectorAppRkfgBeta.VERSION_BUILD);
             editor.commit();
         }
 
@@ -552,7 +549,7 @@ public class VectorHomeActivity extends VectorAppCompatActivity implements Searc
             mUseGAAlert.setMessage(getApplicationContext().getString(R.string.ga_use_alert_message)).setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    if (null != VectorApp.getInstance()) {
+                    if (null != VectorAppRkfgBeta.getInstance()) {
                         mUseGAAlert = null;
                         GAHelper.setUseGA(VectorHomeActivity.this, true);
                     }
@@ -560,7 +557,7 @@ public class VectorHomeActivity extends VectorAppCompatActivity implements Searc
             }).setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    if (null != VectorApp.getInstance()) {
+                    if (null != VectorAppRkfgBeta.getInstance()) {
                         mUseGAAlert = null;
                         GAHelper.setUseGA(VectorHomeActivity.this, false);
                     }
@@ -568,7 +565,7 @@ public class VectorHomeActivity extends VectorAppCompatActivity implements Searc
             }).show();
         }
 
-        if ((null != VectorApp.getInstance()) && VectorApp.getInstance().didAppCrash()) {
+        if ((null != VectorAppRkfgBeta.getInstance()) && VectorAppRkfgBeta.getInstance().didAppCrash()) {
             // crash reported by a rage shake
             try {
                 final AlertDialog.Builder appCrashedAlert = new AlertDialog.Builder(this);
@@ -584,7 +581,7 @@ public class VectorHomeActivity extends VectorAppCompatActivity implements Searc
                     }
                 }).show();
 
-                VectorApp.getInstance().clearAppCrashStatus();
+                VectorAppRkfgBeta.getInstance().clearAppCrashStatus();
             } catch (Exception e) {
                 Log.e(LOG_TAG, "## onResume() : appCrashedAlert failed " + e.getMessage());
             }
@@ -611,7 +608,7 @@ public class VectorHomeActivity extends VectorAppCompatActivity implements Searc
 
         checkDeviceId();
 
-        mSyncInProgressView.setVisibility(VectorApp.isSessionSyncing(mSession) ? View.VISIBLE : View.GONE);
+        mSyncInProgressView.setVisibility(VectorAppRkfgBeta.isSessionSyncing(mSession) ? View.VISIBLE : View.GONE);
 
         displayCryptoCorruption();
 
@@ -1177,7 +1174,7 @@ public class VectorHomeActivity extends VectorAppCompatActivity implements Searc
                         .setPositiveButton(R.string.ok,
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
-                                        CommonActivityUtils.logout(VectorApp.getCurrentActivity(), true);
+                                        CommonActivityUtils.logout(VectorAppRkfgBeta.getCurrentActivity(), true);
                                     }
                                 });
                 // create alert dialog
@@ -1898,7 +1895,7 @@ public class VectorHomeActivity extends VectorAppCompatActivity implements Searc
                 public void run() {
                     if (isActiveCall) {
                         // suspend the app if required
-                        VectorApp.getInstance().onCallEnd();
+                        VectorAppRkfgBeta.getInstance().onCallEnd();
                         // hide the view
                         mVectorPendingCallView.checkPendingCall();
                         // clear call in progress notification
@@ -2199,7 +2196,7 @@ public class VectorHomeActivity extends VectorAppCompatActivity implements Searc
             editor.commit();
 
             if (TextUtils.isEmpty(mSession.getCredentials().deviceId)) {
-                new AlertDialog.Builder(VectorApp.getCurrentActivity())
+                new AlertDialog.Builder(VectorAppRkfgBeta.getCurrentActivity())
                         .setMessage(R.string.e2e_enabling_on_app_update)
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
@@ -2262,7 +2259,7 @@ public class VectorHomeActivity extends VectorAppCompatActivity implements Searc
 
             @Override
             public void onLiveEventsChunkProcessed(String fromToken, String toToken) {
-                if ((VectorApp.getCurrentActivity() == VectorHomeActivity.this) && mRefreshOnChunkEnd) {
+                if ((VectorAppRkfgBeta.getCurrentActivity() == VectorHomeActivity.this) && mRefreshOnChunkEnd) {
                     dispatchOnSummariesUpdate();
                 }
 

@@ -27,10 +27,10 @@ import android.webkit.MimeTypeMap;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 
 public class VectorContentProvider extends ContentProvider {
-    public static String AUTHORITIES = "im.vector.VectorApp.provider";
+    public static String AUTHORITIES = "im.vector.VectorAppRkfgBeta.provider";
 
     private static final String BUG_SEPARATOR = "bugreport";
 
@@ -51,8 +51,8 @@ public class VectorContentProvider extends ContentProvider {
             return Uri.parse("content://" + VectorContentProvider.AUTHORITIES + path.substring(attachmentsBasePath.length()));
         }
 
-        if (null != VectorApp.mLogsDirectoryFile) {
-            String logBasePath = VectorApp.mLogsDirectoryFile.getAbsolutePath();
+        if (null != VectorAppRkfgBeta.mLogsDirectoryFile) {
+            String logBasePath = VectorAppRkfgBeta.mLogsDirectoryFile.getAbsolutePath();
 
             if (path.startsWith(logBasePath)) {
                 return Uri.parse("content://" + VectorContentProvider.AUTHORITIES + "/" + BUG_SEPARATOR + path.substring(logBasePath.length()));
@@ -68,8 +68,8 @@ public class VectorContentProvider extends ContentProvider {
             File privateFile = null;
 
             if (uri.getPath().contains("/" + BUG_SEPARATOR + "/")) {
-                if (null != VectorApp.mLogsDirectoryFile) {
-                    privateFile = new File(VectorApp.mLogsDirectoryFile, uri.getLastPathSegment());
+                if (null != VectorAppRkfgBeta.mLogsDirectoryFile) {
+                    privateFile = new File(VectorAppRkfgBeta.mLogsDirectoryFile, uri.getLastPathSegment());
                 }
             } else {
                 privateFile = new File(getContext().getFilesDir(), uri.getPath());

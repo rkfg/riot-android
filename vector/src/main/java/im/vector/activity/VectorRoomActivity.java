@@ -36,7 +36,6 @@ import android.preference.PreferenceManager;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.TextPaint;
 import android.text.TextUtils;
@@ -97,7 +96,7 @@ import java.util.TimerTask;
 
 import im.vector.Matrix;
 import im.vector.R;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.ViewedRoomTracker;
 import im.vector.fragments.VectorMessageListFragment;
 import im.vector.fragments.VectorUnknownDevicesFragment;
@@ -414,7 +413,7 @@ public class VectorRoomActivity extends MXCActionBarActivity implements MatrixMe
                         mVectorMessageListFragment.setIsRoomEncrypted(mRoom.isEncrypted());
                     }
 
-                    if (!VectorApp.isAppInBackground()) {
+                    if (!VectorAppRkfgBeta.isAppInBackground()) {
                         // do not send read receipt for the typing events
                         // they are ephemeral ones.
                         if (!Event.EVENT_TYPE_TYPING.equals(eventType)) {
@@ -1063,7 +1062,7 @@ public class VectorRoomActivity extends MXCActionBarActivity implements MatrixMe
 
             mEditText.setHint((mRoom.isEncrypted() && mSession.isCryptoEnabled()) ? R.string.room_message_placeholder_encrypted : R.string.room_message_placeholder_not_encrypted);
 
-            mSyncInProgressView.setVisibility(VectorApp.isSessionSyncing(mSession) ? View.VISIBLE : View.GONE);
+            mSyncInProgressView.setVisibility(VectorAppRkfgBeta.isSessionSyncing(mSession) ? View.VISIBLE : View.GONE);
         } else {
             mSyncInProgressView.setVisibility(View.GONE);
         }
@@ -1301,7 +1300,7 @@ public class VectorRoomActivity extends MXCActionBarActivity implements MatrixMe
             mLatestDisplayedEvent = eventAtBottom;
 
             // don't send receive if the app is in background
-            if (!VectorApp.isAppInBackground()) {
+            if (!VectorAppRkfgBeta.isAppInBackground()) {
                 sendReadReceipt();
             } else {
                 Log.d(LOG_TAG, "## onScroll : the app is in background");
@@ -1395,7 +1394,7 @@ public class VectorRoomActivity extends MXCActionBarActivity implements MatrixMe
         } else if (id == R.id.ic_action_room_leave) {
             if (null != mRoom) {
                 Log.d(LOG_TAG, "Leave the room " + mRoom.getRoomId());
-                new AlertDialog.Builder(VectorApp.getCurrentActivity())
+                new AlertDialog.Builder(VectorAppRkfgBeta.getCurrentActivity())
                         .setTitle(R.string.room_participants_leave_prompt_title)
                         .setMessage(R.string.room_participants_leave_prompt_msg)
                         .setPositiveButton(R.string.leave, new DialogInterface.OnClickListener() {
@@ -1635,7 +1634,7 @@ public class VectorRoomActivity extends MXCActionBarActivity implements MatrixMe
      * Send the editText text.
      */
     private void sendTextMessage() {
-        VectorApp.markdownToHtml(mEditText.getText().toString().trim(), new VectorMarkdownParser.IVectorMarkdownParserListener() {
+        VectorAppRkfgBeta.markdownToHtml(mEditText.getText().toString().trim(), new VectorMarkdownParser.IVectorMarkdownParserListener() {
             @Override
             public void onMarkdownParsed(final String text, final String HTMLText) {
                 VectorRoomActivity.this.runOnUiThread(new Runnable() {

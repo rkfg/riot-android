@@ -65,7 +65,7 @@ import java.util.Map;
 
 import im.vector.Matrix;
 import im.vector.R;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.ViewedRoomTracker;
 import im.vector.activity.VectorCallViewActivity;
 import im.vector.activity.VectorHomeActivity;
@@ -426,7 +426,7 @@ public class EventStreamService extends Service {
                     return START_NOT_STICKY;
                 }
 
-                if ((null != VectorApp.getInstance()) && VectorApp.getInstance().didAppCrash()) {
+                if ((null != VectorAppRkfgBeta.getInstance()) && VectorAppRkfgBeta.getInstance().didAppCrash()) {
                     Log.e(LOG_TAG, "onStartCommand : no auto restart because the application crashed");
                     return START_NOT_STICKY;
                 }
@@ -748,14 +748,14 @@ public class EventStreamService extends Service {
         if (!checkState) {
             Log.d(LOG_TAG, "catchup  without checking state ");
         } else {
-            Log.d(LOG_TAG, "catchup with state " + state + " CurrentActivity " + VectorApp.getCurrentActivity());
+            Log.d(LOG_TAG, "catchup with state " + state + " CurrentActivity " + VectorAppRkfgBeta.getCurrentActivity());
 
             // the catchup should only be done
             // 1- the state is in catchup : the event stream might have gone to sleep between two catchups
             // 2- the thread is suspended
             // 3- the application has been launched by a push so there is no displayed activity
             canCatchup = (state == StreamAction.CATCHUP) || (state == StreamAction.PAUSE) ||
-                    ((StreamAction.START == state) && (null == VectorApp.getCurrentActivity()));
+                    ((StreamAction.START == state) && (null == VectorAppRkfgBeta.getCurrentActivity()));
         }
 
         if (canCatchup) {
@@ -967,7 +967,7 @@ public class EventStreamService extends Service {
         final String roomId = event.roomId;
 
         // Just don't bing for the room the user's currently in
-        if (!VectorApp.isAppInBackground() && (roomId != null) && event.roomId.equals(ViewedRoomTracker.getInstance().getViewedRoomId())) {
+        if (!VectorAppRkfgBeta.isAppInBackground() && (roomId != null) && event.roomId.equals(ViewedRoomTracker.getInstance().getViewedRoomId())) {
             Log.d(LOG_TAG, "prepareNotification : don't bing because it is the currently opened room");
             return;
         }

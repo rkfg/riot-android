@@ -88,7 +88,7 @@ import java.util.Locale;
 
 import im.vector.Matrix;
 import im.vector.R;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.activity.CommonActivityUtils;
 import im.vector.activity.CountryPickerActivity;
 import im.vector.activity.PhoneNumberAdditionActivity;
@@ -149,7 +149,7 @@ public class VectorSettingsPreferencesFragment extends PreferenceFragment implem
         @Override
         public void onAccountInfoUpdate(MyUser myUser) {
             // refresh the settings value
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(VectorApp.getInstance().getApplicationContext());
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(VectorAppRkfgBeta.getInstance().getApplicationContext());
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString(getString(R.string.settings_display_name), myUser.displayname);
             editor.commit();
@@ -513,7 +513,7 @@ public class VectorSettingsPreferencesFragment extends PreferenceFragment implem
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValueAsVoid) {
                 if (TextUtils.isEmpty(mSession.getCredentials().deviceId)) {
-                    new AlertDialog.Builder(VectorApp.getCurrentActivity())
+                    new AlertDialog.Builder(VectorAppRkfgBeta.getCurrentActivity())
                             .setMessage(R.string.room_settings_labs_end_to_end_warnings)
                             .setPositiveButton(R.string.logout, new DialogInterface.OnClickListener() {
                                 @Override
@@ -1262,7 +1262,7 @@ public class VectorSettingsPreferencesFragment extends PreferenceFragment implem
         final String mediumFriendlyName = ThreePid.getMediumFriendlyName(pid.medium, getActivity()).toLowerCase();
         final String dialogMessage = getString(R.string.settings_delete_threepid_confirmation, mediumFriendlyName, preferenceSummary);
 
-        new AlertDialog.Builder(VectorApp.getCurrentActivity())
+        new AlertDialog.Builder(VectorAppRkfgBeta.getCurrentActivity())
                 .setTitle(R.string.dialog_title_confirmation)
                 .setMessage(dialogMessage)
                 .setPositiveButton(R.string.remove, new DialogInterface.OnClickListener() {
@@ -1349,7 +1349,7 @@ public class VectorSettingsPreferencesFragment extends PreferenceFragment implem
                 preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
-                        new AlertDialog.Builder(VectorApp.getCurrentActivity())
+                        new AlertDialog.Builder(VectorAppRkfgBeta.getCurrentActivity())
                                 .setMessage(getString(R.string.settings_unignore_user, userId))
                                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                                     @Override
@@ -1451,7 +1451,7 @@ public class VectorSettingsPreferencesFragment extends PreferenceFragment implem
                             @Override
                             public boolean onPreferenceLongClick(Preference preference) {
                                 final String dialogMessage = getString(R.string.settings_delete_notification_targets_confirmation);
-                                new AlertDialog.Builder(VectorApp.getCurrentActivity())
+                                new AlertDialog.Builder(VectorAppRkfgBeta.getCurrentActivity())
                                         .setTitle(R.string.dialog_title_confirmation)
                                         .setMessage(dialogMessage)
                                         .setPositiveButton(R.string.remove, new DialogInterface.OnClickListener() {
@@ -2576,7 +2576,7 @@ public class VectorSettingsPreferencesFragment extends PreferenceFragment implem
                 CommonActivityUtils.exportKeys(mSession, passPhrase1EditText.getText().toString(), new ApiCallback<String>() {
                     private void onDone(String message) {
                         hideLoadingView();
-                        Toast.makeText(VectorApp.getInstance().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VectorAppRkfgBeta.getInstance().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

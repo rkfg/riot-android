@@ -65,7 +65,7 @@ import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
 import im.vector.R;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.Matrix;
 
 /**
@@ -374,11 +374,11 @@ public class BugReporter {
      * Send a bug report either with email or with Vector.
      */
     public static void sendBugReport() {
-        final Activity currentActivity = VectorApp.getCurrentActivity();
+        final Activity currentActivity = VectorAppRkfgBeta.getCurrentActivity();
 
         // no current activity so cannot display an alert
         if (null == currentActivity) {
-            sendBugReport(VectorApp.getInstance().getApplicationContext(), true, true, true, "", null);
+            sendBugReport(VectorAppRkfgBeta.getInstance().getApplicationContext(), true, true, true, "", null);
             return;
         }
 
@@ -451,12 +451,12 @@ public class BugReporter {
                     progressBar.setVisibility(View.VISIBLE);
                     progressBar.setProgress(0);
 
-                    sendBugReport(VectorApp.getInstance(), includeLogsButton.isChecked(), includeCrashLogsButton.isChecked(), includeScreenShotButton.isChecked(), bugReportText.getText().toString(), new IMXBugReportListener() {
+                    sendBugReport(VectorAppRkfgBeta.getInstance(), includeLogsButton.isChecked(), includeCrashLogsButton.isChecked(), includeScreenShotButton.isChecked(), bugReportText.getText().toString(), new IMXBugReportListener() {
                         @Override
                         public void onUploadFailed(String reason) {
                             try {
-                                if (null != VectorApp.getInstance() && !TextUtils.isEmpty(reason)) {
-                                    Toast.makeText(VectorApp.getInstance(), VectorApp.getInstance().getString(R.string.send_bug_report_failed, reason), Toast.LENGTH_LONG).show();
+                                if (null != VectorAppRkfgBeta.getInstance() && !TextUtils.isEmpty(reason)) {
+                                    Toast.makeText(VectorAppRkfgBeta.getInstance(), VectorAppRkfgBeta.getInstance().getString(R.string.send_bug_report_failed, reason), Toast.LENGTH_LONG).show();
                                 }
                             } catch (Exception e) {
                                 Log.e(LOG_TAG, "## onUploadFailed() : failed to display the toast " + e.getMessage());
@@ -508,8 +508,8 @@ public class BugReporter {
                         @Override
                         public void onUploadSucceed() {
                             try {
-                                if (null != VectorApp.getInstance()) {
-                                    Toast.makeText(VectorApp.getInstance(), VectorApp.getInstance().getString(R.string.send_bug_report_sent), Toast.LENGTH_LONG).show();
+                                if (null != VectorAppRkfgBeta.getInstance()) {
+                                    Toast.makeText(VectorAppRkfgBeta.getInstance(), VectorAppRkfgBeta.getInstance().getString(R.string.send_bug_report_sent), Toast.LENGTH_LONG).show();
                                 }
                             } catch (Exception e) {
                                 Log.e(LOG_TAG, "## onUploadSucceed() : failed to dismiss the toast " + e.getMessage());
@@ -609,20 +609,20 @@ public class BugReporter {
      */
     private static Bitmap takeScreenshot() {
         // sanity check
-        if (VectorApp.getCurrentActivity() == null) {
+        if (VectorAppRkfgBeta.getCurrentActivity() == null) {
             return null;
         }
         // get content view
-        View contentView = VectorApp.getCurrentActivity().findViewById(android.R.id.content);
+        View contentView = VectorAppRkfgBeta.getCurrentActivity().findViewById(android.R.id.content);
         if (contentView == null) {
-            Log.e(LOG_TAG, "Cannot find content view on " + VectorApp.getCurrentActivity() + ". Cannot take screenshot.");
+            Log.e(LOG_TAG, "Cannot find content view on " + VectorAppRkfgBeta.getCurrentActivity() + ". Cannot take screenshot.");
             return null;
         }
 
         // get the root view to snapshot
         View rootView = contentView.getRootView();
         if (rootView == null) {
-            Log.e(LOG_TAG, "Cannot find root view on " + VectorApp.getCurrentActivity() + ". Cannot take screenshot.");
+            Log.e(LOG_TAG, "Cannot find root view on " + VectorAppRkfgBeta.getCurrentActivity() + ". Cannot take screenshot.");
             return null;
         }
         // refresh it
@@ -632,7 +632,7 @@ public class BugReporter {
         try {
             return rootView.getDrawingCache();
         } catch (OutOfMemoryError oom) {
-            Log.e(LOG_TAG, "Cannot get drawing cache for " + VectorApp.getCurrentActivity() + " OOM.");
+            Log.e(LOG_TAG, "Cannot get drawing cache for " + VectorAppRkfgBeta.getCurrentActivity() + " OOM.");
         } catch (Exception e) {
             Log.e(LOG_TAG, "Cannot get snapshot of screen: " + e);
         }

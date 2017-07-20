@@ -22,7 +22,7 @@ public class UnrecognizedCertHandler {
     private static HashSet<String> openDialogIds = new HashSet<>();
 
     public static void show(final HomeserverConnectionConfig hsConfig, final Fingerprint unrecognizedFingerprint, boolean existing, final Callback callback) {
-        final Activity activity = VectorApp.getCurrentActivity();
+        final Activity activity = VectorAppRkfgBeta.getCurrentActivity();
         if (activity == null) return;
 
         final String dialogId;
@@ -135,7 +135,7 @@ public class UnrecognizedCertHandler {
             }
         };
 
-        final EventEmitter<Activity> emitter = VectorApp.getInstance().getOnActivityDestroyedListener();
+        final EventEmitter<Activity> emitter = VectorAppRkfgBeta.getInstance().getOnActivityDestroyedListener();
         emitter.register(destroyListener);
 
         dialog.setOnDismissListener(new AlertDialog.OnDismissListener() {

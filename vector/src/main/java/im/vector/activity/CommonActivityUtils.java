@@ -85,7 +85,7 @@ import java.util.Map;
 import im.vector.Matrix;
 import im.vector.MyPresenceManager;
 import im.vector.R;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.adapters.VectorRoomsSelectionAdapter;
 import im.vector.contacts.ContactsManager;
 import im.vector.contacts.PIDsRetriever;
@@ -351,7 +351,7 @@ public class CommonActivityUtils {
         Log.d(LOG_TAG, "## logout() : from " + activity + " goToLoginPage " + goToLoginPage);
 
         // if no activity is provided, use the application context instead.
-        final Context context = (null == activity) ? VectorApp.getInstance().getApplicationContext() : activity;
+        final Context context = (null == activity) ? VectorAppRkfgBeta.getInstance().getApplicationContext() : activity;
 
         EventStreamService.removeNotification();
         stopEventStream(context);
@@ -530,7 +530,7 @@ public class CommonActivityUtils {
      * @param context the context.
      */
     public static void catchupEventStream(Context context) {
-        if (VectorApp.isAppInBackground()) {
+        if (VectorAppRkfgBeta.isAppInBackground()) {
             Log.d(LOG_TAG, "catchupEventStream");
             sendEventStreamAction(context, EventStreamService.StreamAction.CATCHUP);
         }
@@ -1066,7 +1066,7 @@ public class CommonActivityUtils {
         if (null != room) {
             // either the user is invited
             if (room.isInvited()) {
-                Log.d(LOG_TAG, "previewRoom : the user is invited -> display the preview " + VectorApp.getCurrentActivity());
+                Log.d(LOG_TAG, "previewRoom : the user is invited -> display the preview " + VectorAppRkfgBeta.getCurrentActivity());
                 previewRoom(fromActivity, roomPreviewData);
             } else {
                 Log.d(LOG_TAG, "previewRoom : open the room");
@@ -1893,7 +1893,7 @@ public class CommonActivityUtils {
      * @param activity activity instance
      */
     public static void onLowMemory(Activity activity) {
-        if (!VectorApp.isAppInBackground()) {
+        if (!VectorAppRkfgBeta.isAppInBackground()) {
             String activityName = (null != activity) ? activity.getClass().getSimpleName() : "NotAvailable";
             Log.e(LOW_MEMORY_LOG_TAG, "Active application : onLowMemory from " + activityName);
 
@@ -1990,7 +1990,7 @@ public class CommonActivityUtils {
      * @param callback the asynchronous callback.
      */
     public static void exportKeys(final MXSession session, final String password, final ApiCallback<String>callback) {
-        final Context appContext = VectorApp.getInstance();
+        final Context appContext = VectorAppRkfgBeta.getInstance();
 
         session.getCrypto().exportRoomKeys(password, new ApiCallback<byte[]>() {
             @Override

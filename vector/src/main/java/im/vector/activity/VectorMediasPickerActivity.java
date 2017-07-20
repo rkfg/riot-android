@@ -84,7 +84,7 @@ import javax.microedition.khronos.egl.EGLDisplay;
 import javax.microedition.khronos.egl.EGLSurface;
 
 import im.vector.R;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.util.ResourceUtils;
 import im.vector.view.RecentMediaLayout;
 import im.vector.view.VideoRecordView;
@@ -437,7 +437,7 @@ public class VectorMediasPickerActivity extends MXCActionBarActivity implements 
 
             // display a preview image?
             if (mIsTakenImageDisplayed) {
-                Bitmap savedBitmap = VectorApp.getSavedPickerImagePreview();
+                Bitmap savedBitmap = VectorAppRkfgBeta.getSavedPickerImagePreview();
                 if ((null != savedBitmap) && !mIsAvatarMode) {
                     // image preview from camera only
                     mImagePreviewImageView.setImageBitmap(savedBitmap);
@@ -482,7 +482,7 @@ public class VectorMediasPickerActivity extends MXCActionBarActivity implements 
                     intent.setClipData(data.getClipData());
                 }
                 // clean footprint in App
-                VectorApp.setSavedCameraImagePreview(null);
+                VectorAppRkfgBeta.setSavedCameraImagePreview(null);
 
                 //intent.putExtras(conData);
                 setResult(RESULT_OK, intent);
@@ -869,7 +869,7 @@ public class VectorMediasPickerActivity extends MXCActionBarActivity implements 
         }
 
         // save bitmap to speed up UI restore (life cycle)
-        VectorApp.setSavedCameraImagePreview(newBitmap);
+        VectorAppRkfgBeta.setSavedCameraImagePreview(newBitmap);
 
         mImagePreviewAvatarModeMaskView.setVisibility(View.GONE);
 
@@ -1231,7 +1231,7 @@ public class VectorMediasPickerActivity extends MXCActionBarActivity implements 
     private void cancelTakeImage() {
         mShotPicturePath = null;
         mSelectedGalleryImage = null;
-        VectorApp.setSavedCameraImagePreview(null);
+        VectorAppRkfgBeta.setSavedCameraImagePreview(null);
 
         startCameraPreview();
         // reset UI ot default: "take picture" button screen
@@ -1279,7 +1279,7 @@ public class VectorMediasPickerActivity extends MXCActionBarActivity implements 
                 Uri uri = Uri.fromFile(new File(mShotPicturePath));
 
                 try {
-                    Bitmap previewBitmap = VectorApp.getSavedPickerImagePreview();
+                    Bitmap previewBitmap = VectorAppRkfgBeta.getSavedPickerImagePreview();
                     String thumbnailPath = getThumbnailPath(mShotPicturePath);
 
                     int rotationAngle = ImageUtils.getRotationAngleForBitmap(VectorMediasPickerActivity.this, uri);
@@ -1316,7 +1316,7 @@ public class VectorMediasPickerActivity extends MXCActionBarActivity implements 
 
         } finally {
             // clean footprint in App
-            VectorApp.setSavedCameraImagePreview(null);
+            VectorAppRkfgBeta.setSavedCameraImagePreview(null);
             finish();
         }
     }
@@ -2143,7 +2143,7 @@ public class VectorMediasPickerActivity extends MXCActionBarActivity implements 
             updateUiConfiguration(UI_SHOW_TAKEN_IMAGE, IMAGE_ORIGIN_GALLERY);
             mImagePreviewImageView.setImageBitmap(aMediaItem.mThumbnail);
             // save bitmap to speed up UI restore (life cycle)
-            VectorApp.setSavedCameraImagePreview(aMediaItem.mThumbnail);
+            VectorAppRkfgBeta.setSavedCameraImagePreview(aMediaItem.mThumbnail);
         } else if (null != aMediaItem.mFileUri) {
             // fall back in case bitmap is not available (unlikely..)
             displayImagePreview(null, null, aMediaItem.mFileUri, IMAGE_ORIGIN_GALLERY);
@@ -2179,7 +2179,7 @@ public class VectorMediasPickerActivity extends MXCActionBarActivity implements 
         intent.putExtras(conData);
         setResult(RESULT_OK, intent);
         // clean footprint in App
-        VectorApp.setSavedCameraImagePreview(null);
+        VectorAppRkfgBeta.setSavedCameraImagePreview(null);
         finish();
     }
 }

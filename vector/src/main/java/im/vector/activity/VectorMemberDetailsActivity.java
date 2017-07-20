@@ -58,7 +58,7 @@ import java.util.List;
 
 import im.vector.Matrix;
 import im.vector.R;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.adapters.VectorMemberDetailsAdapter;
 import im.vector.adapters.VectorMemberDetailsDevicesAdapter;
 import im.vector.fragments.VectorUnknownDevicesFragment;
@@ -746,7 +746,7 @@ public class VectorMemberDetailsActivity extends MXCActionBarActivity implements
 
         if (currentSelfPowerLevel == newPowerLevel) {
             // ask to the user to confirmation thu upgrade.
-            new AlertDialog.Builder(VectorApp.getCurrentActivity())
+            new AlertDialog.Builder(VectorAppRkfgBeta.getCurrentActivity())
                     .setMessage(R.string.room_participants_power_level_prompt)
                     .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                         @Override

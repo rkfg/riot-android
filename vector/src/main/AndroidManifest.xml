@@ -55,7 +55,7 @@
     <application
         tools:replace="allowBackup,label"
         android:allowBackup="false"
-        android:name="im.vector.VectorApp"
+        android:name="im.vector.VectorAppRkfgBeta"
         android:icon="@drawable/logo"
         android:logo="@drawable/logo"
         android:label="@string/riot_app_name"
@@ -396,7 +396,7 @@
         <service android:name="im.vector.services.EventStreamService" />
 
         <provider
-            android:authorities="im.vector.VectorApp.provider"
+            android:authorities="im.vector.VectorAppRkfgBeta"
             android:name="im.vector.db.VectorContentProvider"
             android:exported="true"/>
     </application>

@@ -42,7 +42,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import im.vector.R;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.receiver.HeadsetConnectionReceiver;
 
 /**
@@ -137,7 +137,7 @@ public class VectorCallSoundManager {
      */
     private static AudioManager getAudioManager() {
         if (null == mAudioManager) {
-            mAudioManager =  (AudioManager)VectorApp.getInstance().getSystemService(Context.AUDIO_SERVICE);
+            mAudioManager =  (AudioManager) VectorAppRkfgBeta.getInstance().getSystemService(Context.AUDIO_SERVICE);
         }
 
         return mAudioManager;
@@ -151,7 +151,7 @@ public class VectorCallSoundManager {
      * @return a RingTone, null if the operation fails.
      */
     static private Ringtone getRingTone(int resId, String filename) {
-        Context context = VectorApp.getInstance();
+        Context context = VectorAppRkfgBeta.getInstance();
         Uri ringToneUri = mRingtoneUrlByFileName.get(filename);
         Ringtone ringtone = null;
 
@@ -387,7 +387,7 @@ public class VectorCallSoundManager {
      * @param aIsVibrateEnabled true to force vibrate, false to stop vibrate.
      */
     private static void enableVibrating(boolean aIsVibrateEnabled) {
-        Vibrator vibrator = (Vibrator)VectorApp.getInstance().getSystemService(Context.VIBRATOR_SERVICE);
+        Vibrator vibrator = (Vibrator) VectorAppRkfgBeta.getInstance().getSystemService(Context.VIBRATOR_SERVICE);
 
         if((null != vibrator) && vibrator.hasVibrator()) {
             if(aIsVibrateEnabled) {
@@ -435,7 +435,7 @@ public class VectorCallSoundManager {
 
         stopRinging();
 
-        mRingBackPlayer = MediaPlayer.create(VectorApp.getInstance(), R.raw.ringback);
+        mRingBackPlayer = MediaPlayer.create(VectorAppRkfgBeta.getInstance(), R.raw.ringback);
 
         if (null != mRingBackPlayer) {
             mRingBackPlayer.setLooping(true);
@@ -459,7 +459,7 @@ public class VectorCallSoundManager {
 
         stopRingTones();
 
-        mCallEndPlayer = MediaPlayer.create(VectorApp.getInstance(), R.raw.callend);
+        mCallEndPlayer = MediaPlayer.create(VectorAppRkfgBeta.getInstance(), R.raw.callend);
 
         if (null != mCallEndPlayer) {
             mCallEndPlayer.setLooping(false);
@@ -493,7 +493,7 @@ public class VectorCallSoundManager {
         stopRingTones();
 
         // use the ringTone to manage sound volume properly
-        mBusyPlayer = MediaPlayer.create(VectorApp.getInstance(), R.raw.busy);
+        mBusyPlayer = MediaPlayer.create(VectorAppRkfgBeta.getInstance(), R.raw.busy);
 
         if (null != mBusyPlayer) {
             // do not update the audio path

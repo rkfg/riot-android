@@ -33,14 +33,11 @@ import org.matrix.androidsdk.MXSession;
 import org.matrix.androidsdk.data.Room;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import im.vector.Matrix;
 import im.vector.MyPresenceManager;
 import im.vector.R;
-import im.vector.VectorApp;
-import im.vector.fragments.VectorUnknownDevicesFragment;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.util.ThemeUtils;
 
 /**
@@ -188,7 +185,7 @@ public class MXCActionBarActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        VectorApp.getInstance().getOnActivityDestroyedListener().fire(this);
+        VectorAppRkfgBeta.getInstance().getOnActivityDestroyedListener().fire(this);
     }
 
     @Override

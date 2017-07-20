@@ -42,7 +42,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import im.vector.Matrix;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.activity.CommonActivityUtils;
 import im.vector.activity.LoginActivity;
 import im.vector.activity.VectorHomeActivity;
@@ -199,7 +199,7 @@ public class VectorUniversalLinkReceiver extends BroadcastReceiver {
     private void manageMemberDetailsActivity(final Context aContext) {
         Log.d(LOG_TAG, "## manageMemberDetailsActivity() : open " + mParameters.get(ULINK_MATRIX_USER_ID_KEY) + " page");
 
-        final Activity currentActivity = VectorApp.getCurrentActivity();
+        final Activity currentActivity = VectorAppRkfgBeta.getCurrentActivity();
 
         if (null != currentActivity) {
             Intent startRoomInfoIntent = new Intent(currentActivity, VectorMemberDetailsActivity.class);
@@ -222,7 +222,7 @@ public class VectorUniversalLinkReceiver extends BroadcastReceiver {
      * @param aContext the context.
      */
     private void manageRoomOnActivity(final Context aContext) {
-        final Activity currentActivity = VectorApp.getCurrentActivity();
+        final Activity currentActivity = VectorAppRkfgBeta.getCurrentActivity();
 
         if (null != currentActivity) {
             currentActivity.runOnUiThread(new Runnable() {
@@ -287,7 +287,7 @@ public class VectorUniversalLinkReceiver extends BroadcastReceiver {
                 openRoomActivity(aContext);
             } else {
 
-                CommonActivityUtils.previewRoom(VectorApp.getCurrentActivity(), mSession, roomIdOrAlias, roomPreviewData, null);
+                CommonActivityUtils.previewRoom(VectorAppRkfgBeta.getCurrentActivity(), mSession, roomIdOrAlias, roomPreviewData, null);
             }
         } else { // room ID is provided as a room alias: get corresponding room ID
 

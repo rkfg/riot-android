@@ -45,7 +45,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -66,8 +65,8 @@ import im.vector.util.VectorMarkdownParser;
 /**
  * The main application injection point
  */
-public class VectorApp extends Application {
-    private static final String LOG_TAG = "VectorApp";
+public class VectorAppRkfgBeta extends Application {
+    private static final String LOG_TAG = "VectorAppRkfgBeta";
 
     // key to save the crash status
     private static final String PREFS_CRASH_KEY = "PREFS_CRASH_KEY";
@@ -75,7 +74,7 @@ public class VectorApp extends Application {
     /**
      * The current instance.
      */
-    private static VectorApp instance = null;
+    private static VectorAppRkfgBeta instance = null;
 
     /**
      * Rage shake detection to send a bug report.
@@ -125,7 +124,7 @@ public class VectorApp extends Application {
     /**
      * @return the current instance
      */
-    public static VectorApp getInstance() {
+    public static VectorAppRkfgBeta getInstance() {
         return instance;
     }
 
@@ -264,12 +263,12 @@ public class VectorApp extends Application {
      * Suspend background threads.
      */
     private void suspendApp() {
-        GcmRegistrationManager gcmRegistrationManager = Matrix.getInstance(VectorApp.this).getSharedGCMRegistrationManager();
+        GcmRegistrationManager gcmRegistrationManager = Matrix.getInstance(VectorAppRkfgBeta.this).getSharedGCMRegistrationManager();
 
         // suspend the events thread if the client uses GCM
         if (!gcmRegistrationManager.isBackgroundSyncAllowed() || (gcmRegistrationManager.useGCM() && gcmRegistrationManager.hasRegistrationToken())) {
             Log.d(LOG_TAG, "suspendApp ; pause the event stream");
-            CommonActivityUtils.pauseEventStream(VectorApp.this);
+            CommonActivityUtils.pauseEventStream(VectorAppRkfgBeta.this);
         } else {
             Log.d(LOG_TAG, "suspendApp ; the event stream is not paused because GCM is disabled.");
         }
@@ -320,7 +319,7 @@ public class VectorApp extends Application {
                 if (null != mCurrentActivity) {
                     Log.e(LOG_TAG, "## startActivityTransitionTimer() : the timer expires but there is an active activity.");
                 } else {
-                    VectorApp.this.mIsInBackground = true;
+                    VectorAppRkfgBeta.this.mIsInBackground = true;
                     mIsCallingInBackground = (null != VectorCallViewActivity.getActiveCall());
 
                     // if there is a pending call
@@ -359,9 +358,9 @@ public class VectorApp extends Application {
 
             // the event stream service has been killed
             if (null == EventStreamService.getInstance()) {
-                CommonActivityUtils.startEventStreamService(VectorApp.this);
+                CommonActivityUtils.startEventStreamService(VectorAppRkfgBeta.this);
             } else {
-                CommonActivityUtils.resumeEventStream(VectorApp.this);
+                CommonActivityUtils.resumeEventStream(VectorAppRkfgBeta.this);
 
                 // try to perform a GCM registration if it failed
                 // or if the GCM server generated a new push key
@@ -422,7 +421,7 @@ public class VectorApp extends Application {
     private void setCurrentActivity(Activity activity) {
         Log.d(LOG_TAG, "## setCurrentActivity() : from " + mCurrentActivity + " to " + activity);
 
-        if (VectorApp.isAppInBackground() && (null != activity)) {
+        if (VectorAppRkfgBeta.isAppInBackground() && (null != activity)) {
             Matrix matrixInstance =  Matrix.getInstance(activity.getApplicationContext());
 
             // sanity check
@@ -656,9 +655,9 @@ public class VectorApp extends Application {
         StringBuilder b = new StringBuilder();
         String appName = Matrix.getApplicationName();
 
-        b.append(appName + " Build : " + VectorApp.VERSION_BUILD + "\n");
-        b.append(appName + " Version : " + VectorApp.VECTOR_VERSION_STRING + "\n");
-        b.append("SDK Version : " + VectorApp.SDK_VERSION_STRING + "\n");
+        b.append(appName + " Build : " + VectorAppRkfgBeta.VERSION_BUILD + "\n");
+        b.append(appName + " Version : " + VectorAppRkfgBeta.VECTOR_VERSION_STRING + "\n");
+        b.append("SDK Version : " + VectorAppRkfgBeta.SDK_VERSION_STRING + "\n");
         b.append("Phone : " + Build.MODEL.trim() + " (" + Build.VERSION.INCREMENTAL + " " + Build.VERSION.RELEASE + " " + Build.VERSION.CODENAME + ")\n");
 
         b.append("Memory statuses \n");
@@ -681,7 +680,7 @@ public class VectorApp extends Application {
         b.append("Thread: ");
         b.append(threadName);
 
-        Activity a = VectorApp.getCurrentActivity();
+        Activity a = VectorAppRkfgBeta.getCurrentActivity();
         if (a != null) {
             b.append(", Activity:");
             b.append(a.getLocalClassName());
@@ -697,8 +696,8 @@ public class VectorApp extends Application {
 
         String bugDescription = b.toString();
 
-        if (null != VectorApp.getInstance()) {
-            VectorApp.getInstance().setAppCrashed(bugDescription);
+        if (null != VectorAppRkfgBeta.getInstance()) {
+            VectorAppRkfgBeta.getInstance().setAppCrashed(bugDescription);
         }
 
         return bugDescription;
@@ -709,7 +708,7 @@ public class VectorApp extends Application {
      * @param description the crash description
      */
     private void setAppCrashed(String description) {
-        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(VectorApp.getInstance());
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(VectorAppRkfgBeta.getInstance());
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(PREFS_CRASH_KEY, true);
         editor.commit();
@@ -722,7 +721,7 @@ public class VectorApp extends Application {
      * @return true if the application crashed
      */
     public boolean didAppCrash() {
-        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(VectorApp.getInstance());
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(VectorAppRkfgBeta.getInstance());
         return preferences.getBoolean(PREFS_CRASH_KEY, false);
     }
 
@@ -731,7 +730,7 @@ public class VectorApp extends Application {
      * Clear the crash status
      */
     public void clearAppCrashStatus() {
-        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(VectorApp.getInstance());
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(VectorAppRkfgBeta.getInstance());
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove(PREFS_CRASH_KEY);
         editor.commit();

@@ -60,7 +60,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Vector;
 
 /**
  * Singleton to control access to the Matrix SDK and providing point of control for MXSessions.
@@ -149,7 +148,7 @@ public class Matrix {
                 }
 
                 // TODO find a way to detect which session is synced
-                VectorApp.clearSyncingSessions();
+                VectorAppRkfgBeta.clearSyncingSessions();
             }
 
             mRefreshUnreadCounter = false;
@@ -193,7 +192,7 @@ public class Matrix {
                             if (null == homeActivity) {
                                 Log.d(LOG_TAG, "onIncomingCall : the home activity does not exist -> launch it");
 
-                                Context context = VectorApp.getInstance();
+                                Context context = VectorAppRkfgBeta.getInstance();
 
                                 // clear the activity stack to home activity
                                 Intent intent = new Intent(context, VectorHomeActivity.class);
@@ -388,7 +387,7 @@ public class Matrix {
             return null;
         }
 
-        boolean appDidCrash = VectorApp.getInstance().didAppCrash();
+        boolean appDidCrash = VectorAppRkfgBeta.getInstance().didAppCrash();
 
         ArrayList<String> matrixIds = new ArrayList<>();
         sessions = new ArrayList<>();
@@ -401,7 +400,7 @@ public class Matrix {
                 // if the application crashed
                 if (appDidCrash) {
                     // clear the session data
-                    session.clear(VectorApp.getInstance());
+                    session.clear(VectorAppRkfgBeta.getInstance());
                     // and open it again
                     session = createSession(config);
                 }
@@ -568,7 +567,7 @@ public class Matrix {
         SimpleApiCallback<Void> callback = new SimpleApiCallback<Void>() {
             @Override
             public void onSuccess(Void info) {
-                VectorApp.removeSyncingSession(session);
+                VectorAppRkfgBeta.removeSyncingSession(session);
 
                 synchronized (LOG_TAG) {
                     mMXSessions.remove(session);
@@ -667,9 +666,9 @@ public class Matrix {
         MXSession session = new MXSession(hsConfig, new MXDataHandler(store, credentials, new MXDataHandler.InvalidTokenListener() {
             @Override
             public void onTokenCorrupted() {
-                if (null != VectorApp.getCurrentActivity()) {
+                if (null != VectorAppRkfgBeta.getCurrentActivity()) {
                     Log.e(LOG_TAG, "## createSession() : onTokenCorrupted");
-                    CommonActivityUtils.logout(VectorApp.getCurrentActivity());
+                    CommonActivityUtils.logout(VectorAppRkfgBeta.getCurrentActivity());
                 }
             }
         }), mAppContext);
@@ -714,8 +713,8 @@ public class Matrix {
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         context.getApplicationContext().startActivity(intent);
 
-                        if (null != VectorApp.getCurrentActivity()) {
-                            VectorApp.getCurrentActivity().finish();
+                        if (null != VectorAppRkfgBeta.getCurrentActivity()) {
+                            VectorAppRkfgBeta.getCurrentActivity().finish();
                         }
                     }});
             }

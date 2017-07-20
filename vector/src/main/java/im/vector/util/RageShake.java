@@ -29,7 +29,7 @@ import android.preference.PreferenceManager;
 import org.matrix.androidsdk.util.Log;
 
 import im.vector.R;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 
 /**
  * Manages the rage sakes
@@ -61,13 +61,13 @@ public class RageShake implements SensorEventListener {
      */
     private void promptForReport() {
         // Cannot prompt for bug, no active activity.
-        if (VectorApp.getCurrentActivity() == null) {
+        if (VectorAppRkfgBeta.getCurrentActivity() == null) {
             return;
         }
 
         try {
             // The user is trying to leave with unsaved changes. Warn about that
-            new AlertDialog.Builder(VectorApp.getCurrentActivity())
+            new AlertDialog.Builder(VectorAppRkfgBeta.getCurrentActivity())
                     .setMessage(R.string.send_bug_report_alert_message)
                     .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
@@ -137,7 +137,7 @@ public class RageShake implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         // ignore the sensor events when the application is in background
-        if (VectorApp.isAppInBackground()) {
+        if (VectorAppRkfgBeta.isAppInBackground()) {
             mLastUpdate = 0;
             return;
         }

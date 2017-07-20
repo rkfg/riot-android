@@ -16,13 +16,8 @@
 package im.vector.ga;
 ;
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
-import android.provider.Settings;
 
-import org.matrix.androidsdk.util.Log;
-
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 
 public class GAHelper {
 
@@ -70,7 +65,7 @@ public class GAHelper {
         Thread.setDefaultUncaughtExceptionHandler (new Thread.UncaughtExceptionHandler() {
             @Override
             public void uncaughtException (Thread thread, Throwable e) {
-                VectorApp.uncaughtException(thread.getName(), e);
+                VectorAppRkfgBeta.uncaughtException(thread.getName(), e);
 
                 if (null != mDefaultExceptionHandler) {
                     mDefaultExceptionHandler.uncaughtException(thread, e);

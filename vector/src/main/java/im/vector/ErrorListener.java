@@ -48,7 +48,7 @@ public class ErrorListener implements ApiFailureCallback {
         Log.e(LOG_TAG, "Network error: " + e.getMessage());
 
         // do not trigger toaster if the application is in background
-        if (!VectorApp.isAppInBackground()) {
+        if (!VectorAppRkfgBeta.isAppInBackground()) {
             UnrecognizedCertificateException unrecCertEx = CertUtil.getCertificateException(e);
             if (unrecCertEx == null) {
                 handleNetworkError(e);
@@ -86,7 +86,7 @@ public class ErrorListener implements ApiFailureCallback {
     }
 
     private void handleNetworkError(Exception e) {
-        if (!VectorApp.isAppInBackground()) {
+        if (!VectorAppRkfgBeta.isAppInBackground()) {
             mActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

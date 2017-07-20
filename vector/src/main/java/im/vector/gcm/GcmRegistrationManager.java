@@ -145,7 +145,7 @@ public final class GcmRegistrationManager {
             mPusherAppName = pInfo.packageName;
             mPusherLang = mContext.getResources().getConfiguration().locale.getLanguage();
         } catch (Exception e) {
-            mPusherAppName = "VectorApp";
+            mPusherAppName = "VectorAppRkfgBeta";
             mPusherLang = "en";
         }
 

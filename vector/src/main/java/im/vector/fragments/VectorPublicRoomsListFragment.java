@@ -39,7 +39,7 @@ import org.matrix.androidsdk.rest.model.PublicRoom;
 import im.vector.Matrix;
 import im.vector.PublicRoomsManager;
 import im.vector.R;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.activity.CommonActivityUtils;
 import im.vector.activity.VectorRoomActivity;
 import im.vector.adapters.VectorPublicRoomsAdapter;
@@ -145,7 +145,7 @@ public class VectorPublicRoomsListFragment extends Fragment {
                     if (null != room) {
                         // either the user is invited
                         if (room.isInvited()) {
-                            Log.d(LOG_TAG, "manageRoom : the user is invited -> display the preview " + VectorApp.getCurrentActivity());
+                            Log.d(LOG_TAG, "manageRoom : the user is invited -> display the preview " + VectorAppRkfgBeta.getCurrentActivity());
                             CommonActivityUtils.previewRoom(getActivity(), roomPreviewData);
                         } else {
                             Log.d(LOG_TAG, "manageRoom : open the room");

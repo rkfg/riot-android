@@ -19,7 +19,6 @@ package im.vector.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.BitmapFactory;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
@@ -82,13 +81,12 @@ import java.util.List;
 import java.util.Set;
 
 import im.vector.R;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.listeners.IMessagesAdapterActionsListener;
 import im.vector.util.MatrixLinkMovementMethod;
 import im.vector.util.MatrixURLSpan;
 import im.vector.util.EventGroup;
 import im.vector.util.ThemeUtils;
-import im.vector.util.VectorUtils;
 
 /**
  * An adapter which can display room information.
@@ -721,7 +719,7 @@ public class VectorMessagesAdapter extends AbstractMessagesAdapter {
 
         //  do not refresh the room when the application is in background
         // on large rooms, it drains a lot of battery
-        if (!VectorApp.isAppInBackground()) {
+        if (!VectorAppRkfgBeta.isAppInBackground()) {
             super.notifyDataSetChanged();
         }
     }

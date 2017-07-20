@@ -66,7 +66,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import im.vector.R;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.activity.CommonActivityUtils;
 import im.vector.activity.MXCActionBarActivity;
 import im.vector.activity.VectorMemberDetailsActivity;
@@ -847,7 +847,7 @@ public class VectorRoomDetailsMembersFragment extends Fragment {
                 String text = getActivity().getString(R.string.room_participants_remove_prompt_msg, participantItem.mDisplayName);
 
                 // The user is trying to leave with unsaved changes. Warn about that
-                new AlertDialog.Builder(VectorApp.getCurrentActivity())
+                new AlertDialog.Builder(VectorAppRkfgBeta.getCurrentActivity())
                         .setTitle(R.string.dialog_title_confirmation)
                         .setMessage(text)
                         .setPositiveButton(R.string.remove, new DialogInterface.OnClickListener() {
@@ -876,7 +876,7 @@ public class VectorRoomDetailsMembersFragment extends Fragment {
             @Override
             public void onLeaveClick() {
                 // The user is trying to leave with unsaved changes. Warn about that
-                new AlertDialog.Builder(VectorApp.getCurrentActivity())
+                new AlertDialog.Builder(VectorAppRkfgBeta.getCurrentActivity())
                         .setTitle(R.string.room_participants_leave_prompt_title)
                         .setMessage(getActivity().getString(R.string.room_participants_leave_prompt_msg))
                         .setPositiveButton(R.string.leave, new DialogInterface.OnClickListener() {

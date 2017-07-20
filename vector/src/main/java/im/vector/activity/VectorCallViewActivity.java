@@ -19,7 +19,6 @@ package im.vector.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -32,7 +31,6 @@ import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import org.matrix.androidsdk.util.Log;
@@ -60,10 +58,9 @@ import java.util.TimerTask;
 
 import im.vector.Matrix;
 import im.vector.R;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.receiver.HeadsetConnectionReceiver;
 import im.vector.services.EventStreamService;
-import im.vector.util.ThemeUtils;
 import im.vector.util.VectorCallSoundManager;
 import im.vector.util.VectorUtils;
 import im.vector.view.VectorPendingCallView;
@@ -1132,11 +1129,11 @@ public class VectorCallViewActivity extends VectorAppCompatActivity implements S
         if(null != mCall) {
             String roomId = mCall.getRoom().getRoomId();
 
-            if (null != VectorApp.getCurrentActivity()) {
+            if (null != VectorAppRkfgBeta.getCurrentActivity()) {
                 HashMap<String, Object> params = new HashMap<>();
                 params.put(VectorRoomActivity.EXTRA_MATRIX_ID, mMatrixId);
                 params.put(VectorRoomActivity.EXTRA_ROOM_ID, roomId);
-                CommonActivityUtils.goToRoomPage(VectorApp.getCurrentActivity(), mSession, params);
+                CommonActivityUtils.goToRoomPage(VectorAppRkfgBeta.getCurrentActivity(), mSession, params);
             } else {
                 Intent intent = new Intent(getApplicationContext(), VectorRoomActivity.class);
                 intent.putExtra(VectorRoomActivity.EXTRA_ROOM_ID, roomId);

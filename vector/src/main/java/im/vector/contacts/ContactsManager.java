@@ -45,7 +45,7 @@ import java.util.List;
 import java.util.Set;
 
 import im.vector.Matrix;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.util.PhoneNumberUtils;
 
 /**
@@ -180,7 +180,7 @@ public class ContactsManager implements SharedPreferences.OnSharedPreferenceChan
             // privacy
             // Log.d(LOG_TAG, "onPIDsRetrieved : the contact " + contact + " retrieves its 3PIds.");
 
-            MXSession session = Matrix.getInstance(VectorApp.getInstance().getApplicationContext()).getSession(accountId);
+            MXSession session = Matrix.getInstance(VectorAppRkfgBeta.getInstance().getApplicationContext()).getSession(accountId);
 
             if ((null != session) && (null != mContactsList)) {
                 for (final Contact contact : mContactsList) {
@@ -241,7 +241,7 @@ public class ContactsManager implements SharedPreferences.OnSharedPreferenceChan
      * Constructor
      */
     public ContactsManager() {
-        mContext = VectorApp.getInstance().getApplicationContext();
+        mContext = VectorAppRkfgBeta.getInstance().getApplicationContext();
         PreferenceManager.getDefaultSharedPreferences(mContext).registerOnSharedPreferenceChangeListener(this);
     }
 
@@ -303,7 +303,7 @@ public class ContactsManager implements SharedPreferences.OnSharedPreferenceChan
             mContactsList = null;
         }
 
-        MXSession defaultSession = Matrix.getInstance(VectorApp.getInstance()).getDefaultSession();
+        MXSession defaultSession = Matrix.getInstance(VectorAppRkfgBeta.getInstance()).getDefaultSession();
 
         if (null != defaultSession) {
             defaultSession.getNetworkConnectivityReceiver().removeEventListener(mNetworkConnectivityReceiver);
@@ -390,7 +390,7 @@ public class ContactsManager implements SharedPreferences.OnSharedPreferenceChan
                 } else {
                     Log.d(LOG_TAG, "## retrievePids() : Start search");
                     mIsRetrievingPids = true;
-                    PIDsRetriever.getInstance().retrieveMatrixIds(VectorApp.getInstance(), mContactsList, false);
+                    PIDsRetriever.getInstance().retrieveMatrixIds(VectorAppRkfgBeta.getInstance(), mContactsList, false);
                 }
             }
         });
@@ -569,9 +569,9 @@ public class ContactsManager implements SharedPreferences.OnSharedPreferenceChan
                 long delta = System.currentTimeMillis() - t0;
 
                 if (0 != mContactsList.size()) {
-                    VectorApp.sendGAStats(VectorApp.getInstance(),
-                            VectorApp.GOOGLE_ANALYTICS_STATS_CATEGORY,
-                            VectorApp.GOOGLE_ANALYTICS_STARTUP_CONTACTS_ACTION,
+                    VectorAppRkfgBeta.sendGAStats(VectorAppRkfgBeta.getInstance(),
+                            VectorAppRkfgBeta.GOOGLE_ANALYTICS_STATS_CATEGORY,
+                            VectorAppRkfgBeta.GOOGLE_ANALYTICS_STARTUP_CONTACTS_ACTION,
                             mContactsList.size() + " contacts in " + delta + " ms",
                             delta
                     );
@@ -584,7 +584,7 @@ public class ContactsManager implements SharedPreferences.OnSharedPreferenceChan
 
                 // trigger a PIDs retrieval
                 // add a network listener to ensure that the PIDS will be retrieved asap a valid network will be found.
-                MXSession defaultSession = Matrix.getInstance(VectorApp.getInstance()).getDefaultSession();
+                MXSession defaultSession = Matrix.getInstance(VectorAppRkfgBeta.getInstance()).getDefaultSession();
                 if (null != defaultSession) {
                     defaultSession.getNetworkConnectivityReceiver().addEventListener(mNetworkConnectivityReceiver);
 

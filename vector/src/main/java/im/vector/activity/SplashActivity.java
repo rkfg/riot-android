@@ -26,7 +26,7 @@ import org.matrix.androidsdk.listeners.MXEventListener;
 import im.vector.ErrorListener;
 import im.vector.Matrix;
 import im.vector.R;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.gcm.GcmRegistrationManager;
 import im.vector.receiver.VectorUniversalLinkReceiver;
 import im.vector.services.EventStreamService;
@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 /**
  * SplashActivity displays a splash while loading and inittializing the client.
@@ -76,9 +75,9 @@ public class SplashActivity extends MXCActionBarActivity {
         Log.e(LOG_TAG, "##onFinish() : start VectorHomeActivity");
 
         if (!hasCorruptedStore()) {
-            VectorApp.sendGAStats(getApplicationContext(),
-                    VectorApp.GOOGLE_ANALYTICS_STATS_CATEGORY,
-                    VectorApp.GOOGLE_ANALYTICS_STARTUP_LAUNCH_SCREEN_ACTION,
+            VectorAppRkfgBeta.sendGAStats(getApplicationContext(),
+                    VectorAppRkfgBeta.GOOGLE_ANALYTICS_STATS_CATEGORY,
+                    VectorAppRkfgBeta.GOOGLE_ANALYTICS_STARTUP_LAUNCH_SCREEN_ACTION,
                     null,
                     System.currentTimeMillis() - mLaunchTime
             );
@@ -169,16 +168,16 @@ public class SplashActivity extends MXCActionBarActivity {
                             try {
                                 int nbrRooms = fSession.getDataHandler().getStore().getRooms().size();
 
-                                VectorApp.sendGAStats(getApplicationContext(),
-                                        VectorApp.GOOGLE_ANALYTICS_STATS_CATEGORY,
-                                        VectorApp.GOOGLE_ANALYTICS_STARTUP_MOUNT_DATA_ACTION,
+                                VectorAppRkfgBeta.sendGAStats(getApplicationContext(),
+                                        VectorAppRkfgBeta.GOOGLE_ANALYTICS_STATS_CATEGORY,
+                                        VectorAppRkfgBeta.GOOGLE_ANALYTICS_STARTUP_MOUNT_DATA_ACTION,
                                         nbrRooms + " rooms in " + (System.currentTimeMillis() - mLaunchTime) + " ms",
                                         System.currentTimeMillis() - mLaunchTime
                                 );
 
-                                VectorApp.sendGAStats(getApplicationContext(),
-                                        VectorApp.GOOGLE_ANALYTICS_STATS_CATEGORY,
-                                        VectorApp.GOOGLE_ANALYTICS_STATS_ROOMS_ACTION,
+                                VectorAppRkfgBeta.sendGAStats(getApplicationContext(),
+                                        VectorAppRkfgBeta.GOOGLE_ANALYTICS_STATS_CATEGORY,
+                                        VectorAppRkfgBeta.GOOGLE_ANALYTICS_STATS_ROOMS_ACTION,
                                         null,
                                         nbrRooms
                                 );
@@ -190,9 +189,9 @@ public class SplashActivity extends MXCActionBarActivity {
                                     label += "(" + preloadTime / nbrRooms + " ms per room)";
                                 }
 
-                                VectorApp.sendGAStats(getApplicationContext(),
-                                        VectorApp.GOOGLE_ANALYTICS_STATS_CATEGORY,
-                                        VectorApp.GOOGLE_ANALYTICS_STARTUP_STORE_PRELOAD_ACTION,
+                                VectorAppRkfgBeta.sendGAStats(getApplicationContext(),
+                                        VectorAppRkfgBeta.GOOGLE_ANALYTICS_STATS_CATEGORY,
+                                        VectorAppRkfgBeta.GOOGLE_ANALYTICS_STARTUP_STORE_PRELOAD_ACTION,
                                         label,
                                         fSession.getDataHandler().getStore().getPreloadTime()
                                 );
@@ -201,8 +200,8 @@ public class SplashActivity extends MXCActionBarActivity {
 
                                 if (null != storeStats) {
                                     for (String key : storeStats.keySet()) {
-                                        VectorApp.sendGAStats(getApplicationContext(),
-                                                VectorApp.GOOGLE_ANALYTICS_STATS_CATEGORY,
+                                        VectorAppRkfgBeta.sendGAStats(getApplicationContext(),
+                                                VectorAppRkfgBeta.GOOGLE_ANALYTICS_STATS_CATEGORY,
                                                 key,
                                                 null,
                                                 storeStats.get(key)
@@ -214,7 +213,7 @@ public class SplashActivity extends MXCActionBarActivity {
                             }
 
                             if (noMoreListener) {
-                                VectorApp.addSyncingSession(session);
+                                VectorAppRkfgBeta.addSyncingSession(session);
                                 onFinish();
                             }
                         }
