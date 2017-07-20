@@ -253,7 +253,7 @@
             android:title="@string/settings_theme"></ListPreference>
 
         <ListPreference
-            android:defaultValue="?android:attr/textAppearanceSmall"
+            android:defaultValue="small"
             android:entries="@array/font_size_text"
             android:entryValues="@array/font_size_values"
             android:key="@string/settings_font_size"
