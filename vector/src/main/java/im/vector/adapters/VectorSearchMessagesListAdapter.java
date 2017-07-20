@@ -39,6 +39,7 @@ import org.matrix.androidsdk.rest.model.RoomMember;
 import org.matrix.androidsdk.util.EventDisplay;
 
 import im.vector.R;
+import im.vector.util.ThemeUtils;
 import im.vector.util.VectorUtils;
 
 /**
@@ -64,7 +65,7 @@ public class VectorSearchMessagesListAdapter extends VectorMessagesAdapter {
 
         setNotifyOnChange(true);
         mDisplayRoomName = displayRoomName;
-        mSearchHighlightMessageTextColor = context.getResources().getColor(R.color.vector_green_color);
+        mSearchHighlightMessageTextColor = ThemeUtils.getColor(context, R.attr.vector_green_color);
     }
 
     /**
@@ -170,7 +171,7 @@ public class VectorSearchMessagesListAdapter extends VectorMessagesAdapter {
         convertView.findViewById(R.id.messagesAdapter_search_separator_line).setVisibility(!TextUtils.isEmpty(headerMessage(position + 1)) ? View.GONE : View.VISIBLE);
 
         final int fPosition = position;
-        
+
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

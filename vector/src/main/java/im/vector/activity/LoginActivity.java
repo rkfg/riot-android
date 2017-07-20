@@ -33,6 +33,8 @@ import android.os.Handler;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.annotation.StringRes;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
@@ -82,6 +84,7 @@ import im.vector.receiver.VectorRegistrationReceiver;
 import im.vector.receiver.VectorUniversalLinkReceiver;
 import im.vector.services.EventStreamService;
 import im.vector.util.PhoneNumberUtils;
+import im.vector.util.ThemeUtils;
 
 /**
  * Displays the login screen.
@@ -1233,7 +1236,7 @@ public class LoginActivity extends MXCActionBarActivity implements RegistrationM
                             mForgotPid.put("client_secret", aClientSecret);
                             mForgotPid.put("id_server", homeServerConfig.getIdentityServerUri().getHost());
                             mForgotPid.put("sid", aSid);
-                            
+
                             mIsPasswordResetted = false;
                             onForgotOnEmailValidated(homeServerConfig);
                         } else {
@@ -1878,10 +1881,13 @@ public class LoginActivity extends MXCActionBarActivity implements RegistrationM
         // 2 - the password has been resetted and the user is invited to switch to the login screen
         mForgotValidateEmailButton.setText(mIsPasswordResetted ? R.string.auth_return_to_login : R.string.auth_reset_password_next_step_button);
 
-        mLoginButton.setBackgroundColor(ContextCompat.getColor(this, isLoginMode ? R.color.vector_green_color : android.R.color.white));
-        mLoginButton.setTextColor(ContextCompat.getColor(this, !isLoginMode ? R.color.vector_green_color : android.R.color.white));
-        mRegisterButton.setBackgroundColor(ContextCompat.getColor(this, !isLoginMode ? R.color.vector_green_color : android.R.color.white));
-        mRegisterButton.setTextColor(ContextCompat.getColor(this, isLoginMode ? R.color.vector_green_color : android.R.color.white));
+        @ColorInt final int green = ThemeUtils.getColor(this, R.attr.vector_green_color);
+        @ColorInt final int white = getResources().getColor(android.R.color.white);
+
+        mLoginButton.setBackgroundColor(isLoginMode ? green : white);
+        mLoginButton.setTextColor(!isLoginMode ? green : white);
+        mRegisterButton.setBackgroundColor(!isLoginMode ? green : white);
+        mRegisterButton.setTextColor(isLoginMode ? green : white);
     }
 
     /**

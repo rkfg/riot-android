@@ -19,6 +19,7 @@ package im.vector.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
@@ -84,6 +85,8 @@ import im.vector.listeners.IMessagesAdapterActionsListener;
 import im.vector.util.MatrixLinkMovementMethod;
 import im.vector.util.MatrixURLSpan;
 import im.vector.util.EventGroup;
+import im.vector.util.ThemeUtils;
+import im.vector.util.VectorUtils;
 
 /**
  * An adapter which can display room information.
@@ -194,6 +197,14 @@ public class VectorMessagesAdapter extends AbstractMessagesAdapter {
                 R.layout.adapter_item_vector_message_image_video,
                 R.layout.adapter_item_vector_message_merge,
                 mediasCache);
+    }
+
+    public int getEncryptingMessageTextColor() {
+        return ThemeUtils.getColor(mContext, R.attr.vector_green_color);
+    }
+
+    public int getDefaultMessageTextColor() {
+        return ThemeUtils.getColor(mContext, R.attr.vector_message_text_color);
     }
 
     /**
@@ -307,14 +318,6 @@ public class VectorMessagesAdapter extends AbstractMessagesAdapter {
     }
 
     // customization methods
-    private int getDefaultMessageTextColor() {
-        return ContextCompat.getColor(mContext, R.color.message_normal);
-    }
-
-    private int getEncryptingMessageTextColor() {
-        return ContextCompat.getColor(mContext, R.color.vector_green_color);
-    }
-
     private int getSendingMessageTextColor() {
         return ContextCompat.getColor(mContext, R.color.message_sending);
     }
@@ -2258,6 +2261,30 @@ public class VectorMessagesAdapter extends AbstractMessagesAdapter {
             ((EventGroup) eventGroupRow.getEvent()).add(row);
             updateHighlightedEventId();
         }
+    }
+
+    public int presenceOnlineColor() {
+        return ThemeUtils.getColor(mContext, R.attr.presence_online);
+    }
+
+    public int presenceOfflineColor() {
+        return ThemeUtils.getColor(mContext, R.attr.presence_offline);
+    }
+
+    public int presenceUnavailableColor() {
+        return ThemeUtils.getColor(mContext, R.attr.presence_unavailable);
+    }
+
+    public int getHighlightMessageTextColor(Context context) {
+        return ThemeUtils.getColor(mContext, R.attr.vector_fuchsia_color);
+    }
+
+    public int getSearchHighlightMessageTextColor(Context context) {
+        return ThemeUtils.getColor(mContext, R.attr.vector_green_color);
+    }
+
+    public int getNotSentMessageTextColor(Context context) {
+        return ThemeUtils.getColor(mContext, R.attr.vector_not_send_color);
     }
 
     /**
