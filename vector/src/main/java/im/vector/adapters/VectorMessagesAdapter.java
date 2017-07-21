@@ -319,19 +319,19 @@ public class VectorMessagesAdapter extends AbstractMessagesAdapter {
 
     // customization methods
     private int getSendingMessageTextColor() {
-        return ContextCompat.getColor(mContext, R.color.message_sending);
+        return ThemeUtils.getColor(mContext, R.attr.vector_message_sending);
     }
 
     private int getHighlightMessageTextColor() {
-        return ContextCompat.getColor(mContext, R.color.vector_fuchsia_color);
+        return ThemeUtils.getColor(mContext, R.attr.vector_fuchsia_color);
     }
 
     private int getSearchHighlightMessageTextColor() {
-        return ContextCompat.getColor(mContext, R.color.vector_green_color);
+        return ThemeUtils.getColor(mContext, R.attr.vector_green_color);
     }
 
     private int getNotSentMessageTextColor() {
-        return ContextCompat.getColor(mContext, R.color.vector_not_send_color);
+        return ThemeUtils.getColor(mContext, R.attr.vector_not_send_color);
     }
 
     /*
@@ -982,7 +982,7 @@ public class VectorMessagesAdapter extends AbstractMessagesAdapter {
             if (row.getEvent().isUndeliverable() || row.getEvent().isUnkownDevice()) {
                 tsTextView.setTextColor(mNotSentMessageTextColor);
             } else {
-                tsTextView.setTextColor(ContextCompat.getColor(mContext, R.color.chat_gray_text));
+                tsTextView.setTextColor(ThemeUtils.getColor(mContext, R.attr.chat_gray_text));
             }
 
             tsTextView.setVisibility((((position + 1) == this.getCount()) || mIsSearchMode) ? View.VISIBLE : View.GONE);
