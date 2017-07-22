@@ -18,6 +18,8 @@ package im.vector.util;
 
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
@@ -73,5 +75,13 @@ public class ThemeUtils {
         TypedValue color = new TypedValue();
         c.getTheme().resolveAttribute(colorAttribute, color, true);
         return color.data;
+    }
+
+    public static Drawable getDrawable(Context c, @AttrRes final int drawableAttribute) {
+        TypedArray a = c.getTheme().obtainStyledAttributes(R.style.AppTheme, new int[]{drawableAttribute});
+        int attributeResourceId = a.getResourceId(0, 0);
+        Drawable icon = c.getResources().getDrawable(attributeResourceId);
+        a.recycle();
+        return icon;
     }
 }

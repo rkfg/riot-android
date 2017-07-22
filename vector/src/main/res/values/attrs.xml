@@ -87,7 +87,7 @@
     <attr name="tab_rooms_secondary" format="color" />
 
     <attr name="direct_chat_indicator" format="color" />
-
+    <attr name="vector_add_icon" format="reference"/>
 </declare-styleable>
 
 </resources>
