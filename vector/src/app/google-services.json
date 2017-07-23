@@ -1,31 +1,27 @@
 {
   "project_info": {
-    "project_number": "912726360885",
-    "firebase_url": "https://vector-alpha.firebaseio.com",
-    "project_id": "vector-alpha",
-    "storage_bucket": "vector-alpha.appspot.com"
+    "project_number": "786804250415",
+    "firebase_url": "https://riot-notifications-9f300.firebaseio.com",
+    "project_id": "riot-notifications-9f300",
+    "storage_bucket": "riot-notifications-9f300.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:912726360885:android:448c9b63161abc9c",
+        "mobilesdk_app_id": "1:786804250415:android:ba0aa406dffef29c",
         "android_client_info": {
-          "package_name": "im.vector.alpha"
+          "package_name": "im.vector.alpha.rkfgbeta"
         }
       },
       "oauth_client": [
         {
-          "client_id": "912726360885-rsae0i66rgqt6ivnudu1pv4tksg9i8b2.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "912726360885-e87n3jva9uoj4vbidvijq78ebg02asv2.apps.googleusercontent.com",
+          "client_id": "786804250415-95h9ifo84ip7r4chluv1q300ft336q3f.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAFZX8IhIfgzdOZvxDP_ISO5WYoU7jmQ5c"
+          "current_key": "AIzaSyBmBHdSlcakDY_40D3Q31bn9ikfWxeAPW4"
         }
       ],
       "services": {

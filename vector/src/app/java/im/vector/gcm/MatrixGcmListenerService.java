@@ -33,7 +33,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import im.vector.Matrix;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 import im.vector.activity.CommonActivityUtils;
 import im.vector.services.EventStreamService;
 
@@ -117,7 +117,7 @@ public class MatrixGcmListenerService extends FirebaseMessagingService {
                 return;
             }
 
-            if (!gcmManager.isBackgroundSyncAllowed() && VectorApp.isAppInBackground()) {
+            if (!gcmManager.isBackgroundSyncAllowed() && VectorAppRkfgBeta.isAppInBackground()) {
                 Log.d(LOG_TAG, "## onMessageReceivedInternal() : the background sync is disabled");
 
                 EventStreamService eventStreamService = EventStreamService.getInstance();
@@ -202,7 +202,7 @@ public class MatrixGcmListenerService extends FirebaseMessagingService {
         final Map<String, String> data = message.getData();
 
         if (null == mUIHandler) {
-            mUIHandler = new android.os.Handler(VectorApp.getInstance().getMainLooper());
+            mUIHandler = new android.os.Handler(VectorAppRkfgBeta.getInstance().getMainLooper());
         }
 
         // prefer running in the UI thread

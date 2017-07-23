@@ -27,7 +27,7 @@ import com.google.android.gms.analytics.ExceptionParser;
 import com.google.android.gms.analytics.HitBuilders;
 
 import im.vector.R;
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 
 public class GAHelper {
 
@@ -72,7 +72,7 @@ public class GAHelper {
      */
     public static Boolean useGA(Context context) {
         // avoid getting the GA issues from the forked branches
-        if (!TextUtils.equals(VectorApp.getInstance().getPackageName(), "im.vector.alpha")) {
+        if (!TextUtils.equals(VectorAppRkfgBeta.getInstance().getPackageName(), "im.vector.alpha")) {
             return false;
         }
 
@@ -138,14 +138,14 @@ public class GAHelper {
             Analytics.initialiseGoogleAnalytics(context, trackerId, new ExceptionParser() {
                 @Override
                 public String getDescription(String threadName, Throwable throwable) {
-                    return VectorApp.uncaughtException(threadName, throwable);
+                    return VectorAppRkfgBeta.uncaughtException(threadName, throwable);
                 }
             });
         } else {
             Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
                 @Override
                 public void uncaughtException(Thread thread, Throwable e) {
-                    VectorApp.uncaughtException(thread.getName(), e);
+                    VectorAppRkfgBeta.uncaughtException(thread.getName(), e);
 
                     if (null != mDefaultExceptionHandler) {
                         mDefaultExceptionHandler.uncaughtException(thread, e);

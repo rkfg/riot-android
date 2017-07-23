@@ -21,7 +21,7 @@ import org.matrix.androidsdk.util.Log;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
 
-import im.vector.VectorApp;
+import im.vector.VectorAppRkfgBeta;
 
 public class GCMHelper {
 
@@ -34,10 +34,10 @@ public class GCMHelper {
         String registrationToken = null;
 
         try {
-            if (null == VectorApp.getInstance()) {
+            if (null == VectorAppRkfgBeta.getInstance()) {
                 Log.e(LOG_TAG, "## getRegistrationToken() : No active application");
             } else {
-                if (null == FirebaseApp.initializeApp(VectorApp.getInstance())) {
+                if (null == FirebaseApp.initializeApp(VectorAppRkfgBeta.getInstance())) {
                     Log.e(LOG_TAG, "## getRegistrationToken() : cannot initialise FirebaseApp");
                 }
             }
