@@ -68,7 +68,7 @@ import im.vector.util.VectorUtils;
  */
 public class VectorMessagesAdapterHelper {
     private static final String LOG_TAG = "AdapterHelper";
-
+    private static final String SETTINGS_SHOW_READ_RECEIPTS_KEY = "SETTINGS_SHOW_READ_RECEIPTS_KEY";
 
     private IMessagesAdapterActionsListener mEventsListener;
     private final MXSession mSession;
@@ -389,7 +389,7 @@ public class VectorMessagesAdapterHelper {
         IMXStore store = mSession.getDataHandler().getStore();
 
         // sanity check
-        if (null == roomState || !PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean(mContext.getString(R.string.settings_show_read_receipts), true)) {
+        if (null == roomState || !PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean(SETTINGS_SHOW_READ_RECEIPTS_KEY, true)) {
             avatarsListView.setVisibility(View.GONE);
             return;
         }
