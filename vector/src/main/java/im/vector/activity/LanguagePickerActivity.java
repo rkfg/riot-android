@@ -37,7 +37,7 @@ import im.vector.R;
 import im.vector.VectorAppRkfgBeta;
 import im.vector.adapters.LanguagesAdapter;
 
-public class LanguagePickerActivity extends AppCompatActivity implements LanguagesAdapter.OnSelectLocaleListener, SearchView.OnQueryTextListener {
+public class LanguagePickerActivity extends VectorAppCompatActivity implements LanguagesAdapter.OnSelectLocaleListener, SearchView.OnQueryTextListener {
 
     private View mLanguagesEmptyView;
     private LanguagesAdapter mAdapter;
