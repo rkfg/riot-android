@@ -261,6 +261,13 @@
             android:summary="%s"
             android:title="@string/settings_default_compression"
             android:key="KEY_DEFAULT_MEDIA_COMPRESSION"/>
+        <ListPreference
+            android:defaultValue="@string/media_source_choose"
+            android:entries="@array/media_sources"
+            android:entryValues="@array/media_source_values"
+            android:summary="%s"
+            android:title="@string/settings_default_media_source"
+            android:key="DEFAULT_MEDIA_SOURCE"/>
     </PreferenceCategory>
 
     <im.vector.preference.VectorDividerCategory/>
