@@ -57,6 +57,7 @@ public class VectorRoomMediasSender {
 
     private static final String TAG_FRAGMENT_IMAGE_SIZE_DIALOG = "TAG_FRAGMENT_IMAGE_SIZE_DIALOG";
     private static final String KEY_DEFAULT_MEDIA_COMPRESSION = "KEY_DEFAULT_MEDIA_COMPRESSION";
+    private static final int[] COMPRESSION_NAME_IDS = new int[]{R.string.compression_opt_list_original, R.string.compression_opt_list_large, R.string.compression_opt_list_medium, R.string.compression_opt_list_small};
 
     /**
      * This listener is displayed when the image has been resized.
@@ -849,8 +850,8 @@ public class VectorRoomMediasSender {
 
                     String[] stringsArray = getImagesCompressionTextsList(mVectorRoomActivity, imageSizes, fileSize);
 
-                    String prefResize = PreferenceManager.getDefaultSharedPreferences(mVectorRoomActivity).getString(KEY_DEFAULT_MEDIA_COMPRESSION, "Choose");
-                    if (mVectorRoomActivity.getString(R.string.compression_opt_list_choose).equals(prefResize)) {
+                    Integer prefResize = Integer.valueOf(PreferenceManager.getDefaultSharedPreferences(mVectorRoomActivity).getString(KEY_DEFAULT_MEDIA_COMPRESSION, "0"));
+                    if (prefResize.equals(0) || prefResize > 4) {
                         final AlertDialog.Builder alert = new AlertDialog.Builder(mVectorRoomActivity);
                         alert.setTitle(mVectorRoomActivity.getString(im.vector.R.string.compression_options));
                         alert.setSingleChoiceItems(stringsArray, -1, new DialogInterface.OnClickListener() {
@@ -883,7 +884,7 @@ public class VectorRoomMediasSender {
                             }
                         });
                     } else {
-                        ImageSize expectedSize = imageSizes.getImageSize(mVectorRoomActivity, prefResize);
+                        ImageSize expectedSize = imageSizes.getImageSize(mVectorRoomActivity, mVectorRoomActivity.getString(COMPRESSION_NAME_IDS[Integer.valueOf(prefResize) - 1]));
                         resizeAndUploadImage(expectedSize, imageSizes, anImageUrl, filename, rotationAngle, aThumbnailURL, anImageFilename, anImageMimeType, aListener);
                     }
                 }

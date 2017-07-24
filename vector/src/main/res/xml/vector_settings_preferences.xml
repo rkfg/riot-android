@@ -257,7 +257,7 @@
         <ListPreference
             android:defaultValue="@string/compression_opt_list_choose"
             android:entries="@array/compression_levels"
-            android:entryValues="@array/compression_levels"
+            android:entryValues="@array/compression_level_values"
             android:summary="%s"
             android:title="@string/settings_default_compression"
             android:key="KEY_DEFAULT_MEDIA_COMPRESSION"/>
@@ -275,7 +275,7 @@
             android:entryValues="@array/theme_codes"
             android:key="@string/settings_theme"
             android:summary="%s"
-            android:title="@string/settings_theme"></ListPreference>
+            android:title="@string/settings_theme"/>
 
         <ListPreference
             android:defaultValue="small"
