@@ -574,10 +574,11 @@
     <string name="settings_show_read_receipts">Show read receipts</string>
     <string name="settings_send_typing_notifications">Send typing notifications</string>
     <string name="settings_show_typing_notifications">Show typing notifications</string>
+    <string name="settings_media">Media</string>
     <string name="settings_default_compression">Default compression</string>
     <string name="compression_opt_list_choose">Choose</string>
-    <string name="settings_media">Media</string>
-
+    <string name="settings_default_media_source">Default media source</string>
+    <string name="media_source_choose">Choose</string>
     <!-- Room Settings -->
 
     <!-- room global settings-->
