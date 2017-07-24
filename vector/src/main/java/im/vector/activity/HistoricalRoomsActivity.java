@@ -100,6 +100,7 @@ public class HistoricalRoomsActivity extends VectorAppCompatActivity implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle(R.string.title_activity_historical);
         setContentView(R.layout.activity_historical);
         ButterKnife.bind(this);
 

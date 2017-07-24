@@ -58,6 +58,7 @@ import im.vector.store.LoginStorage;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -389,12 +390,13 @@ public class Matrix {
 
         boolean appDidCrash = VectorAppRkfgBeta.getInstance().didAppCrash();
 
-        ArrayList<String> matrixIds = new ArrayList<>();
+        HashSet<String> matrixIds = new HashSet<>();
         sessions = new ArrayList<>();
 
         for(HomeserverConnectionConfig config: hsConfigList) {
             // avoid duplicated accounts.
-            if (config.getCredentials() != null && matrixIds.indexOf(config.getCredentials().userId) < 0) {
+            // null userId has been reported by GA
+            if (config.getCredentials() != null && !TextUtils.isEmpty(config.getCredentials().userId) && !matrixIds.contains(config.getCredentials().userId)) {
                 MXSession session = createSession(config);
 
                 // if the application crashed
@@ -412,6 +414,10 @@ public class Matrix {
 
         synchronized (LOG_TAG) {
             mMXSessions = sessions;
+        }
+
+        if (0 == sessions.size()) {
+            return null;
         }
 
         return sessions.get(0);

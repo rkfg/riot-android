@@ -31,37 +31,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Filter;
 
+import java.util.Locale;
+
 import im.vector.R;
-import im.vector.adapters.CountryAdapter;
-import im.vector.util.CountryPhoneData;
-import im.vector.util.PhoneNumberUtils;
-import im.vector.util.ThemeUtils;
+import im.vector.VectorAppRkfgBeta;
+import im.vector.adapters.LanguagesAdapter;
 
-public class CountryPickerActivity extends VectorAppCompatActivity implements CountryAdapter.OnSelectCountryListener, SearchView.OnQueryTextListener {
+public class LanguagePickerActivity extends AppCompatActivity implements LanguagesAdapter.OnSelectLocaleListener, SearchView.OnQueryTextListener {
 
-    public static final String EXTRA_IN_WITH_INDICATOR = "EXTRA_IN_WITH_INDICATOR";
-
-    public static final String EXTRA_OUT_COUNTRY_NAME = "EXTRA_OUT_COUNTRY_NAME";
-    public static final String EXTRA_OUT_COUNTRY_CODE = "EXTRA_OUT_COUNTRY_CODE";
-    public static final String EXTRA_OUT_CALLING_CODE = "EXTRA_OUT_CALLING_CODE";
-
-    private RecyclerView mCountryRecyclerView;
-    private View mCountryEmptyView;
-    private CountryAdapter mCountryAdapter;
+    private View mLanguagesEmptyView;
+    private LanguagesAdapter mAdapter;
     private SearchView mSearchView;
 
-    private boolean mWithIndicator;
-
-     /*
+    /*
      * *********************************************************************************************
      * Static methods
      * *********************************************************************************************
      */
 
-    public static Intent getIntent(final Context context, final boolean withIndicator) {
-        final Intent intent = new Intent(context, CountryPickerActivity.class);
-        intent.putExtra(EXTRA_IN_WITH_INDICATOR, withIndicator);
-        return intent;
+    public static Intent getIntent(final Context context) {
+        return new Intent(context, LanguagePickerActivity.class);
     }
 
     /*
@@ -74,8 +63,8 @@ public class CountryPickerActivity extends VectorAppCompatActivity implements Co
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setTitle(R.string.settings_select_country);
-        setContentView(R.layout.activity_country_picker);
+        setTitle(R.string.settings_select_language);
+        setContentView(R.layout.activity_langagues_picker);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
@@ -85,16 +74,12 @@ public class CountryPickerActivity extends VectorAppCompatActivity implements Co
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }
         }
-
-        final Intent intent = getIntent();
-        mWithIndicator = intent.getBooleanExtra(EXTRA_IN_WITH_INDICATOR, false);
-
         initViews();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_country_picker, menu);
+        getMenuInflater().inflate(R.menu.menu_languages_picker, menu);
 
         final MenuItem searchItem = menu.findItem(R.id.action_search);
         if (searchItem != null) {
@@ -135,21 +120,20 @@ public class CountryPickerActivity extends VectorAppCompatActivity implements Co
     */
 
     private void initViews() {
-        mCountryEmptyView = findViewById(R.id.country_empty_view);
-
-        mCountryRecyclerView = (RecyclerView) findViewById(R.id.country_recycler_view);
+        mLanguagesEmptyView = findViewById(R.id.languages_empty_view);
+        RecyclerView languagesRecyclerView = (RecyclerView) findViewById(R.id.languages_recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mCountryRecyclerView.setLayoutManager(layoutManager);
-        mCountryAdapter = new CountryAdapter(PhoneNumberUtils.getCountriesWithIndicator(), mWithIndicator, this);
-        mCountryRecyclerView.setAdapter(mCountryAdapter);
+        languagesRecyclerView.setLayoutManager(layoutManager);
+        mAdapter = new LanguagesAdapter(VectorAppRkfgBeta.getApplicationLocales(this), this);
+        languagesRecyclerView.setAdapter(mAdapter);
     }
 
-    private void filterCountries(final String pattern) {
-        mCountryAdapter.getFilter().filter(pattern, new Filter.FilterListener() {
+    private void filterLocales(final String pattern) {
+        mAdapter.getFilter().filter(pattern, new Filter.FilterListener() {
             @Override
             public void onFilterComplete(int count) {
-                mCountryEmptyView.setVisibility(count > 0 ? View.GONE : View.VISIBLE);
+                mLanguagesEmptyView.setVisibility(count > 0 ? View.GONE : View.VISIBLE);
             }
         });
     }
@@ -161,18 +145,15 @@ public class CountryPickerActivity extends VectorAppCompatActivity implements Co
     */
 
     @Override
-    public void onSelectCountry(CountryPhoneData country) {
-        Intent intent = new Intent();
-        intent.putExtra(EXTRA_OUT_COUNTRY_NAME, country.getCountryName());
-        intent.putExtra(EXTRA_OUT_COUNTRY_CODE, country.getCountryCode());
-        intent.putExtra(EXTRA_OUT_CALLING_CODE, country.getCallingCode());
-        setResult(RESULT_OK, intent);
+    public void onSelectLocale(Locale locale) {
+        VectorAppRkfgBeta.updateApplicationLocale(this, locale);
+        setResult(RESULT_OK);
         finish();
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        filterCountries(newText);
+        filterLocales(newText);
         return true;
     }
 

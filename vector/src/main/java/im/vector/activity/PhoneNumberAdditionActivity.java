@@ -96,6 +96,8 @@ public class PhoneNumberAdditionActivity extends VectorAppCompatActivity impleme
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setTitle(R.string.settings_add_phone_number);
         setContentView(R.layout.activity_phone_number_addition);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
