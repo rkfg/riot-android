@@ -587,6 +587,7 @@
     <string name="compression_opt_list_choose">Choose</string>
     <string name="settings_default_media_source">Default media source</string>
     <string name="media_source_choose">Choose</string>
+    <string name="settings_play_shutter_sound">Play shutter sound</string>
     <!-- Room Settings -->
 
     <!-- room global settings-->
